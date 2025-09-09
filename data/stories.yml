@@ -1,0 +1,34 @@
+version: "3.1"
+
+stories:
+
+- story: flujo básico de saludo y menú
+  steps:
+    - intent: saludo
+    - action: utter_menu
+
+- story: flujo consultar por síntoma
+  steps:
+    - intent: opcion_consultar_sintoma
+    - action: utter_solicitar_sintoma
+    - intent: consultar_por_sintoma
+    - action: action_consultar_sintoma
+
+- story: flujo consultar por nombre
+  steps:
+    - intent: opcion_consultar_medicamento
+    - action: utter_pedir_medicamento
+    - intent: consultar_por_nombre
+    - action: action_consultar_por_nombre
+
+- story: pedir listas
+  steps:
+    - intent: listar_sintomas
+    - action: action_listar_sintomas
+    - intent: listar_medicamentos
+    - action: action_listar_medicamentos
+
+- story: cerrar conversación
+  steps:
+    - intent: despedida
+    - action: utter_ok_despedida

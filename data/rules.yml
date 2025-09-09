@@ -1,0 +1,55 @@
+version: "3.1"
+
+rules:
+
+- rule: Mostrar menú al saludar
+  steps:
+    - intent: saludo
+    - action: utter_menu
+
+- rule: Mostrar menú cuando lo pidan
+  steps:
+    - intent: volver_menu
+    - action: utter_menu
+
+- rule: Ayuda
+  steps:
+    - intent: ayuda
+    - action: utter_ayuda
+
+- rule: Despedida
+  steps:
+    - intent: despedida
+    - action: utter_ok_despedida
+
+# Opción 1: consultar por síntoma
+- rule: Opción consultar síntoma (menú)
+  steps:
+    - intent: opcion_consultar_sintoma
+    - action: utter_solicitar_sintoma
+
+- rule: Consultar por síntoma (respuesta directa)
+  steps:
+    - intent: consultar_por_sintoma
+    - action: action_consultar_sintoma
+
+- rule: Listar síntomas
+  steps:
+    - intent: listar_sintomas
+    - action: action_listar_sintomas
+
+# Opción 2: consultar por nombre
+- rule: Opción consultar por nombre (menú)
+  steps:
+    - intent: opcion_consultar_medicamento
+    - action: utter_pedir_medicamento
+
+- rule: Consultar por nombre (respuesta directa)
+  steps:
+    - intent: consultar_por_nombre
+    - action: action_consultar_por_nombre
+
+- rule: Listar medicamentos
+  steps:
+    - intent: listar_medicamentos
+    - action: action_listar_medicamentos

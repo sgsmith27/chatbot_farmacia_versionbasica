@@ -1,0 +1,101 @@
+version: "3.1"
+
+nlu:
+
+# Saludo / ayuda / menú / despedida
+- intent: saludo
+  examples: |
+    - hola
+    - buenos días
+    - buenas
+    - qué tal
+
+- intent: ayuda
+  examples: |
+    - ayuda
+    - qué puedes hacer
+    - cómo funcionas
+    - no sé qué poner
+
+- intent: volver_menu
+  examples: |
+    - menu
+    - volver
+    - regresar al menú
+    - mostrar menú
+
+- intent: despedida
+  examples: |
+    - adiós
+    - gracias, hasta luego
+    - nos vemos
+    - chao
+
+# Opción 1 (menú)
+- intent: opcion_consultar_sintoma
+  examples: |
+    - 1
+    - consultar síntoma
+    - consultar por síntoma
+    - síntomas
+
+# Opción 2 (menú)
+- intent: opcion_consultar_medicamento
+  examples: |
+    - 2
+    - consultar medicamento
+    - consultar por nombre
+    - medicamentos
+
+# Listas
+- intent: listar_sintomas
+  examples: |
+    - lista de síntomas
+    - síntomas disponibles
+    - qué síntomas reconoces
+
+- intent: listar_medicamentos
+  examples: |
+    - lista de medicamentos
+    - medicamentos disponibles
+    - qué medicamentos conoces
+
+# Consultar por síntoma (entity: sintoma)
+- intent: consultar_por_sintoma
+  examples: |
+    - tengo [dolor de cabeza](sintoma)
+    - [fiebre](sintoma)
+    - [diarrea](sintoma)
+    - [tos](sintoma)
+    - [acidez estomacal](sintoma)
+    - me duele la cabeza
+    - presento fiebre
+    - siento acidez
+
+# Consultar por nombre (entity: medicamento)
+- intent: consultar_por_nombre
+  examples: |
+    - información de [paracetamol](medicamento)
+    - qué es [ibuprofeno](medicamento)
+    - [loperamida](medicamento)
+    - datos de [dextrometorfano](medicamento)
+    - [omeprazol](medicamento)
+    - quiero saber de paracetamol
+    - dime del ibuprofeno
+
+# (Opcional) lookup para mejorar NER básico
+- lookup: sintoma
+  examples: |
+    - dolor de cabeza
+    - fiebre
+    - diarrea
+    - tos
+    - acidez estomacal
+
+- lookup: medicamento
+  examples: |
+    - paracetamol
+    - ibuprofeno
+    - loperamida
+    - dextrometorfano
+    - omeprazol
