@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+  <meta charset="utf-8" />
+  <title>Chatbot</title>
+  <style>
+    body { font: 16px system-ui; max-width: 720px; margin: 2rem auto; }
+    #log p { white-space: pre-wrap; margin: .4rem 0; }
+    #log .user { color: #0366d6; }
+    #log .bot  { color: #333; }
+  </style>
+  <div id="log"></div>
+  <input id="msg" placeholder="Escribe: hola" />
+  <button id="send">Enviar</button>
+
+  <script>
+    const API = "http://localhost:5005/webhooks/rest/webhook";
+    const log = (cls, txt) => {
+      const p = document.createElement("p");
+      p.className = cls;
+      p.textContent = txt;
+      document.querySelector("#log").appendChild(p);
+    };
+
+    async function send(msg) {
+      log("user", "Tú: " + msg);
+      const res = await fetch(API, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ sender: "web", message: msg }),
+      });
+      const data = await res.json();
+      if (!Array.isArray(data) || data.length === 0) {
+        log("bot", "⚠️ Sin respuesta del servidor.");
+        return;
+      }
+      data.forEach(m => {
+        if (m.text) log("bot", "Bot: " + m.text);
+      });
+    }
+
+    document.querySelector("#send").onclick = () => {
+      const msg = document.querySelector("#msg").value.trim();
+      if (msg) send(msg);
+    };
+  </script>
+</html>
